@@ -156,6 +156,14 @@ void insertEdge(int a, int b, int w) {//간선추가 함수
         insertVerAdj(b, a);
     }
 }
+void insertVerAdj(int a, int  b) {//인접리스트 추가
+    node* p = G->vertices[a].adjacent;
+    while (p->next != NULL) {//마지막노드로 이동
+        p = p->next;
+    }
+    p->next = getnode(b);//그 다음에 노드추가
+    arrangeVerAdj(a);//정렬
+}
 
 
 int main() {
