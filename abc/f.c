@@ -80,6 +80,47 @@ int QremoveMin() {//가장 작은 큐 인덱스 반환
         }
     }
 }
+void PrinmJarnikMST() {
+    ver* s;
+    node* h;
+    int find;
+    int u, z, w;
+    Q = (queue*)malloc(sizeof(queue) * (n + 1));//큐동적할당 정점개수+1
+    for (int i = 1; i <= n; i++) {//0번째 인덱스는 사용하지 않음
+        G->vertices[i].d = 100000;//큰수로 초기화하자 무한대를 뜻함
+        G->vertices[i].p = -1;//이어진 선을 뜻함
+        Q[i].key = G->vertices[i].d;//QreplaceKey()를 호출해도 되지만 교체가 아닌 초기화이니까 그냥 넣어준다.
+        Q[i].removed = 0;//0으로 초기화 삭제 여부
+    }
+    s = &(G->vertices[1]);//시작점인 인덱스 1
+    s->d = 0;//1의 거리는 0으로 만들어줌
+    QreplaceKey(1, 0);//d를 바꿔줄때는 큐의 키도 교체해준다.
+    while (QisEmpty() == 0) {//큐가 빌때까지 반복
+        u = QremoveMin();//가장 작은 큐의 인덱스 u
+        printf(" %d", u);//출력
+        h = G->vertices[u].adjacent;//정점 u의 인접정점 포인터 h
+        h = h->next;//첫번째는 헤더이니 넘기고
+        while (h != NULL) {//인접정점 전부 돌리면서
+            z = h->index;//인접정점의 인덱스 z
+            find = findEdg(u, z);//u와 z사이의 간선을 찾자 find는 해당간선의 인덱스
+            w = G->edges[find].weight;//그간선의 가중치 w
+            if (Q[z].removed == 0 && (w < G->vertices[z].d)) {//큐에서 삭제되지 않았고 w가 큐에서 해당인덱스 키값보다 작다면
+                G->vertices[z].d = w;//도착한 정점의 거리를 갱신하고
+                G->vertices[z].p = find;//그 정점까지 간 선을 p에 저장
+                QreplaceKey(z, w);//큐도 갱신
+            }
+            h = h->next;//인접정점 넥스트
+        }
+    }
+    for (int i = 1; i <= n; i++) {//정점 1~ n까지
+        if (G->vertices[i].p != -1) {//초기값은 전부 -1이고 사용한 간선은 p에 저장됨
+            int E = G->vertices[i].p;//간선 인덱스의
+            int W = G->edges[E].weight;//가중치를 찾아
+            MST += W;//다 더하고
+        }
+    }
+    printf("\n%d", MST);//MST 총무게를 출력하자.
+}
 
 
 int main() {
