@@ -136,6 +136,16 @@ int findEdg(int a, int b) {//해당되는 간선의 인덱스를 찾아주는 �
     }
     return 0;
 }
+void init() {//이것저것 전부 초기화해주는 함수
+    G = (graph*)malloc(sizeof(graph));//G 동적할당
+    G->vertices = (ver*)malloc(sizeof(ver) * (n + 1));//정점구조체배열
+    G->edges = (edg*)malloc(sizeof(edg) * (m + 1));//간선구조체배열
+    //간선의 구조체배열 정점의 구조체 배열 모두 0번째를 헤더대용으로 사용한다.
+    for (int i = 1; i <= n; i++) {
+        G->vertices[i].adjacent = getnode(-1);
+    }
+    //각 정점배열에 인접리스트의 헤더를 동적할당해 만들어준다.
+}
 
 
 int main() {
