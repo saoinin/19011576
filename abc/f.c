@@ -127,11 +127,47 @@ node* getnode(int i) {//노드(인접정점 구조체)생성 함수
     new->next = NULL;
     return new;
 }
+int findEdg(int a, int b) {//해당되는 간선의 인덱스를 찾아주는 함수
+    for (int i = 1; i <= M; i++) {
+        if (G->edges[i].a == a && G->edges[i].b == b || G->edges[i].a == b && G->edges[i].b == a) {
+            //무방향이므로 a b는 서로 바뀔수 있기에 이런 조건
+            return i;
+        }
+    }
+    return 0;
+}
+void init() {//이것저것 전부 초기화해주는 함수
+    G = (graph*)malloc(sizeof(graph));//G 동적할당
+    G->vertices = (ver*)malloc(sizeof(ver) * (n + 1));//정점구조체배열
+    G->edges = (edg*)malloc(sizeof(edg) * (m + 1));//간선구조체배열
+    //간선의 구조체배열 정점의 구조체 배열 모두 0번째를 헤더대용으로 사용한다.
+    for (int i = 1; i <= n; i++) {
+        G->vertices[i].adjacent = getnode(-1);
+    }
+    //각 정점배열에 인접리스트의 헤더를 동적할당해 만들어준다.
+}
+void insertEdge(int a, int b, int w) {//간선추가 함수
+    M++;//간선 개수 +1
+    G->edges[M].a = a;
+    G->edges[M].b = b;
+    G->edges[M].weight = w;//구조체배열 해당인덱스에 추가
+    insertVerAdj(a, b);//인접리스트 추가
+    if (a != b) {//a와 b가 같다면 한번만 추가해도 되지만 다르다면 a기준 한번 b기준 한번
+        insertVerAdj(b, a);
+    }
+}
 
 
 int main() {
     int u, v, w;
     scanf("%d %d", &n, &m);
+    init();//초기화 동적할당 과정
+    for (int i = 0; i < m; i++) {
+        scanf("%d %d %d", &u, &v, &w);
+        insertEdge(u, v, w);
+    }
+
+    
     
     return 0;
 }
