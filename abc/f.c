@@ -146,6 +146,16 @@ void init() {//이것저것 전부 초기화해주는 함수
     }
     //각 정점배열에 인접리스트의 헤더를 동적할당해 만들어준다.
 }
+void insertEdge(int a, int b, int w) {//간선추가 함수
+    M++;//간선 개수 +1
+    G->edges[M].a = a;
+    G->edges[M].b = b;
+    G->edges[M].weight = w;//구조체배열 해당인덱스에 추가
+    insertVerAdj(a, b);//인접리스트 추가
+    if (a != b) {//a와 b가 같다면 한번만 추가해도 되지만 다르다면 a기준 한번 b기준 한번
+        insertVerAdj(b, a);
+    }
+}
 
 
 int main() {
