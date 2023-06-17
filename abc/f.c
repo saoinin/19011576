@@ -47,6 +47,18 @@ void QreplaceKey(int e, int k) {//키교체
     Q[e].key = k;//e번째 큐의 키를 k로 바꿈
     return;
 }
+int QisEmpty() {//큐가 비어있는지 확인
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        count += Q[i].removed;//비어있다면 1이기때문에 카운트
+    }
+    if (count == n) {//정점의 개수만큼 카운트 됐다면
+        return 1;//1 반환
+    }
+    else {
+        return 0;//아니라면 0반환
+    }
+}
 
 
 int main() {
