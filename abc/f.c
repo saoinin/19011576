@@ -131,6 +131,7 @@ node* getnode(int i) {//노드(인접정점 구조체)생성 함수
 
 int main() {
     int u, v, w;
+    scanf("%d %d", &n, &m);
     
     return 0;
 }
