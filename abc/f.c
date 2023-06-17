@@ -121,6 +121,12 @@ void PrinmJarnikMST() {
     }
     printf("\n%d", MST);//MST 총무게를 출력하자.
 }
+node* getnode(int i) {//노드(인접정점 구조체)생성 함수
+    node* new = (node*)malloc(sizeof(node));
+    new->index = i;
+    new->next = NULL;
+    return new;
+}
 
 
 int main() {
