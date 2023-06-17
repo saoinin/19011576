@@ -43,6 +43,10 @@ void QreplaceKey(int e, int k);
 int QisEmpty();
 int QremoveMin();
 void freeAll();
+void QreplaceKey(int e, int k) {//키교체
+    Q[e].key = k;//e번째 큐의 키를 k로 바꿈
+    return;
+}
 
 
 int main() {
