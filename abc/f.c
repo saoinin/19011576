@@ -127,10 +127,20 @@ node* getnode(int i) {//노드(인접정점 구조체)생성 함수
     new->next = NULL;
     return new;
 }
+int findEdg(int a, int b) {//해당되는 간선의 인덱스를 찾아주는 함수
+    for (int i = 1; i <= M; i++) {
+        if (G->edges[i].a == a && G->edges[i].b == b || G->edges[i].a == b && G->edges[i].b == a) {
+            //무방향이므로 a b는 서로 바뀔수 있기에 이런 조건
+            return i;
+        }
+    }
+    return 0;
+}
 
 
 int main() {
     int u, v, w;
+    
     
     return 0;
 }
