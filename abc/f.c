@@ -181,6 +181,22 @@ void arrangeVerAdj(int a) {//a정점의 인접리스트 정렬
         p = p->next;
     }
 }
+void freeAll() {//전부다 동적할당 해제하는 함수
+    int i;
+    node* p, * q;
+    free(G->edges);//간선구조체배열 동적할당해제
+    for (i = 1; i <= n; i++) {
+        p = G->vertices[i].adjacent;//인접리스트를 동적할당 해제
+        while (p != NULL) {
+            q = p->next;
+            free(p);
+            p = q;
+        }
+    }
+    free(G->vertices);//정점구조체배열 동적할당해제
+    free(G);//그래프구조체 동적할당해제
+    free(Q);//큐 동적할당 해제
+}
 
 
 int main() {
