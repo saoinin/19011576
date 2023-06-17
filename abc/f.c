@@ -190,7 +190,11 @@ int main() {
     for (int i = 0; i < m; i++) {
         scanf("%d %d %d", &u, &v, &w);
         insertEdge(u, v, w);
-    }
+    }    
+    PrinmJarnikMST();//최소신장트리
+    freeAll();//동적할당해제
+
+    
 
     
     
