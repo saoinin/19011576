@@ -140,6 +140,13 @@ int findEdg(int a, int b) {//해당되는 간선의 인덱스를 찾아주는 �
 
 int main() {
     int u, v, w;
+    scanf("%d %d", &n, &m);
+    init();//초기화 동적할당 과정
+    for (int i = 0; i < m; i++) {
+        scanf("%d %d %d", &u, &v, &w);
+        insertEdge(u, v, w);
+    }
+
     
     
     return 0;
