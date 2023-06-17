@@ -59,6 +59,27 @@ int QisEmpty() {//큐가 비어있는지 확인
         return 0;//아니라면 0반환
     }
 }
+int QremoveMin() {//가장 작은 큐 인덱스 반환
+    int a;
+    int Min = 100000;
+    //큰 수 Q의 초기값이기도 하지만 프로그램이 정상 작동한다면 이 숫자가 Min이 될 일은 없음
+    for (int i = 1; i <= n; i++) {
+        if (Q[i].removed == 1) {//삭제된 큐는 넘기자
+            continue;
+        }
+        a = Q[i].key;//큐의 키를 구하고
+        if (a < Min) {//Min보다 작냐
+            Min = a;//Min 갱신
+        }
+    }
+    for (int i = 1; i <= n; i++) {//Min에 해당되는 인덱스를 찾자
+        //만약 같은 거리가 있다면 더 작은 인덱스를 고를것임
+        if (Q[i].key == Min && Q[i].removed == 0) {//삭제되지 않았고 키가 Min이라면
+            Q[i].removed = 1;//삭제해주고
+            return i;//인덱스 반환
+        }
+    }
+}
 
 
 int main() {
