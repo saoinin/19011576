@@ -164,6 +164,23 @@ void insertVerAdj(int a, int  b) {//인접리스트 추가
     p->next = getnode(b);//그 다음에 노드추가
     arrangeVerAdj(a);//정렬
 }
+void arrangeVerAdj(int a) {//a정점의 인접리스트 정렬
+    node* p = G->vertices[a].adjacent->next;//첫번째는 헤더니까 그다음 노드
+    node* q;
+    int tmp;
+    while (p->next != NULL) {//정렬을 위한 p와 q 위치 조정
+        q = p->next;//q는 p 오른쪽
+        while (q != NULL) {//오른쪽 끝까지
+            if (p->index > q->index) {//비교후
+                tmp = p->index;//오름차순이 되게 뒤바꿈
+                p->index = q->index;
+                q->index = tmp;
+            }
+            q = q->next;
+        }
+        p = p->next;
+    }
+}
 
 
 int main() {
